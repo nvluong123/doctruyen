@@ -15,7 +15,7 @@ source.include_exts = py,png,jpg,kv,atlas,txt
 version = 1.0
 
 # Thư viện cần thiết
-requirements = python3,kivy,Cython==0.29.36
+requirements = python3,kivy
 
 # Hướng màn hình
 orientation = portrait

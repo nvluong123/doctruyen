@@ -22,7 +22,7 @@ jobs:
           path: |
             .buildozer
             .buildozer_global
-          key: buildozer-${{ hashFiles('buildozer.spec') }}
+          key: buildozer-v2-${{ hashFiles('buildozer.spec') }}
 
       - name: Cài công cụ build Android
         run: |
@@ -36,7 +36,7 @@ jobs:
             cmake libffi-dev libssl-dev \
             build-essential ccache
           python -m pip install --upgrade pip
-          pip install "Cython==0.29.36" "buildozer==1.5.0"
+          pip install "buildozer==1.5.0"
 
       - name: Build APK bằng Buildozer
         run: buildozer -v android debug
