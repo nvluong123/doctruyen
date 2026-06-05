@@ -16,6 +16,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Cài Java 17 cho Gradle
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
       - name: Cache Buildozer
         uses: actions/cache@v4
         with:
