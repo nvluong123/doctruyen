@@ -15,7 +15,7 @@ source.include_exts = py,png,jpg,kv,atlas,txt
 version = 1.0
 
 # Thư viện cần thiết
-requirements = python3,kivy
+requirements = python3==3.11.6,kivy==2.3.0,Cython==0.29.36
 
 # Hướng màn hình
 orientation = portrait
@@ -32,7 +32,7 @@ android.api = 34
 android.minapi = 24
 
 # Kiến trúc (đa số máy hiện nay)
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # Cho phép truy cập bộ nhớ theo kiểu cũ (giúp đọc /sdcard dễ hơn)
 android.allow_backup = 1
