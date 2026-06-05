@@ -1,0 +1,26 @@
+name: Build APK
+
+# Chạy mỗi khi đẩy code lên, hoặc bấm nút chạy thủ công trong tab Actions
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lấy code
+        uses: actions/checkout@v4
+
+      - name: Build APK bằng Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          buildozer_version: stable
+
+      - name: Tải APK lên Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctruyen-apk
+          path: ${{ steps.buildozer.outputs.filename }}
