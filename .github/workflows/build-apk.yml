@@ -1,6 +1,5 @@
 name: Build APK
 
-# Chạy mỗi khi đẩy code lên, hoặc bấm nút chạy thủ công trong tab Actions
 on:
   push:
   workflow_dispatch:
@@ -12,15 +11,24 @@ jobs:
       - name: Lấy code
         uses: actions/checkout@v4
 
-      - name: Build APK bằng Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
+      - name: Cài Python
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
-          buildozer_version: stable
+          python-version: "3.11"
+
+      - name: Cài công cụ build Android
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk zip unzip autoconf libtool pkg-config \
+            zlib1g-dev libncurses-dev cmake libffi-dev libssl-dev
+          python -m pip install --upgrade pip
+          pip install buildozer cython
+
+      - name: Build APK bằng Buildozer
+        run: buildozer android debug
 
       - name: Tải APK lên Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: doctruyen-apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
